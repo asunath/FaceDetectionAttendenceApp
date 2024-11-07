@@ -1,0 +1,43 @@
+{% extends 'userpage.html' %}
+
+{% block title %}
+    Apply Leave
+{% endblock title  %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'User/reqhistory.css' %}">
+    
+    <main>
+        <section>
+
+            <h2>Leave History</h2>
+            <table class="history_table">
+
+                <tr>
+                    <th>SL.No</th>
+                    <th>Type</th>
+                    <th>Starting Date</th>
+                    <th>Ending Date</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                </tr>
+
+                {% for req in requests %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{req.type}}</td>
+                        <td>{{req.startDate}}</td>
+                        <td>{{req.endDate}}</td>
+                        <td>{{req.reason}}</td>
+                        <td>{{req.status}}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+
+        </section>
+    </main>
+
+{% endblock content %}

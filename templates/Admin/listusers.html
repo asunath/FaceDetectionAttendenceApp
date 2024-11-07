@@ -1,0 +1,39 @@
+{% extends 'adminpage.html' %}
+
+{% block title %}
+    Leave Requests
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'Admin/listuser.css' %}">
+
+    <main>
+        <section>
+            <h2>Active Users</h2>
+            <table>
+
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <!-- <th>Role</th> -->
+                    <th>Action</th>
+                </tr>
+                
+                {% for users in all_users %}
+                    <tr>
+                        <td>{{users.name}}</td>
+                        <td>{{users.email}}</td>
+                        <!-- <td>{{users.role}}</td> -->
+                        <td>
+                            <button id="deleteBtn"><a href="{% url 'deleteuser' users.id %}">Delete</a></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </section>
+    </main>
+
+{% endblock content %}

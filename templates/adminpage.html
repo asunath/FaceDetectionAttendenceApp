@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <title>{% block title %}
+            Title
+        {% endblock title %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'pagedesign.css' %}">
+
+        <script>
+            function toggleDashboard() {
+                let dashboard = document.getElementById("dashboard");
+                if (dashboard.style.left === "-250px") {
+                    dashboard.style.left = "0";
+                    document.querySelector('.content').style.marginLeft = "250px"; // Show dashboard
+                } else {
+                    dashboard.style.left = "-250px";
+                    document.querySelector('.content').style.marginLeft = "0"; // Hide dashboard
+                }
+            }
+            function redirectToLogout() {
+                window.location.href = "{% url 'logout' %}";
+            }
+            // Wait for the DOM content to be fully loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get a reference to the logout button
+                var logoutButton = document.querySelector('.logoutBtn');
+
+                // Check if the logout button exists
+                if (logoutButton) {
+                    // Add an event listener to the logout button
+                    logoutButton.addEventListener('click', function() {
+                        // Code to logout user goes here...
+                        alert("Logged out successfully!");
+                    });
+                } else {
+                    console.error('Logout button not found');
+                }
+            });
+        </script>
+        
+    </head>
+
+    <body>
+
+        <div class="header">
+            <button onclick="toggleDashboard()" id="toggleDashboardBtn"><img src="{% static 'dash.svg' %}" alt="Dashboard"></button>
+            <div>
+                <button class="logoutBtn" onclick="redirectToLogout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="dashboard" id="dashboard">
+            <span id="closeDashboardBtn" class="close-btn" onclick="toggleDashboard()">&#10006; Close</span>
+            <ul>
+                <a href="{% url 'admindash' %}"><li>Dashboard</li></a>
+                <a href="{% url 'requestlist' %}"><li>Leave Requests</li></a>
+                <a href="{% url 'registration' %}"><li>User Registration</li></a>
+                <a href="{% url 'users' %}"><li>Manage Users</li></a>
+                <a href="{% url 'manageleavetypes' %}"><li>Leave Types</li></a>
+                <a href="{% url 'facerecognition' %}"><li>Face Recognition</li></a>
+            </ul>
+        </div>
+
+        <div class="content" id="content">
+
+
+            {% block content %}
+                
+            {% endblock content %}
+
+
+        </div>
+
+    </body>
+
+</html>

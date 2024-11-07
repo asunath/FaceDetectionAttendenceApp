@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+
+        <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'home.css' %}">
+
+        <script>
+            function redirectToLogin(){
+                    window.location.href = "{% url 'loginpage' %}";
+                }
+        </script>
+
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        {% block content %}
+
+        <section class="hero">
+            <h1>Welcome to The Insightful Eye</h1>
+            <p>The ultimate facial recognition attendance and leave management system</p>
+            <div class="buttons">
+                <button type="submit" onclick="redirectToLogin()">Login</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Key Features</h2>
+                <div class="feature-content">
+                    <h3>Facial Recognition Attendance</h3>
+                    <p>Accurately mark attendance using advanced facial recognition technology, ensuring quick and reliable identification.</p>
+                </div>
+                <div class="feature-content">
+                    <h3>Leave Management</h3>
+                    <p>Easily manage leave requests and approvals with automated tracking and notifications.</p>
+                </div>
+                <div class="feature-content">
+                    <h3>Secure and Reliable</h3>
+                    <p>Our system ensures the highest level of security and reliability to protect your data and maintain system integrity.</p>
+                </div>
+        </section>   
+        
+        <section class="news-updates">
+            <h2>News and Updates</h2>
+            <div class="news-item">
+                <h3>System Maintenance Scheduled</h3>
+                <p><strong>Date:</strong> 08 August 2024</p>
+                <p>We will be performing routine maintenance on our servers to ensure continued reliability and performance. The system may be temporarily unavailable during this time. We apologize for any inconvenience this may cause.</p>
+            </div>
+            <div class="news-item">
+                <h3>Data Privacy and Security Enhancements</h3>
+                <p><strong>Date:</strong> 21 August 2024</p>
+                <p>In our continuous effort to protect your data, we have implemented new security protocols and data encryption methods to ensure the highest level of data privacy.</p>
+            </div>
+            <div class="news-item">
+                <h3>Employee Training Sessions Available</h3>
+                <p><strong>Date:</strong> 02 September 2024</p>
+                <p>We are offering training sessions for all employees to familiarize them with the new features and functionalities of our attendance and leave management system. Please sign up through the portal.</p>
+            </div>
+        </section>
+    
+        <footer>
+            <p>Contact Us | Privacy Policy | Terms of Service</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </footer>
+
+        {% endblock content %}
+    </body>
+
+</html>

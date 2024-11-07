@@ -1,0 +1,119 @@
+{% extends 'userpage.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'User/profile.css' %}">
+
+    <h2>Welcome {{user_profile.name}}</h2>
+    
+    <main class="main_content">
+                
+        <section class="content" >
+            
+            <button type="submit" class="editProfileBtn" hidden>Edit Profile</button><br>
+
+            <h3>User Details</h3>
+
+            <section id="data">
+
+                {% csrf_token %}
+                <table>
+
+                    <tr>
+                        <td><label>Full Name</label></td>
+                        <td class="blank"></td>
+                        <!-- <td><label>Department</label></td> -->
+                    </tr>
+
+                    <tr>
+                        <td class="data">{{ user_profile.name }}</td>
+                        <td class="blank"></td>
+                        <!-- <td>Department</td> -->
+                    </tr>
+
+                    <tr>
+                        <td><label>Gender</label></td>
+                        <td class="blank"></td>
+                        <td><label>Date of Birth</label></td>
+                    </tr>
+
+                    <tr>
+                        <td class="data">{{ user_profile.gender }}</td>
+                        <td class="blank"></td>
+                        <td class="data">{{ user_profile.dob }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Mobile Number</label></td>
+                        <td class="blank"></td>
+                        <td><label>Email</label></td>
+                    </tr>
+
+                    <tr>
+                        <td class="data">{{ user_profile.mobile }}</td>
+                        <td class="blank"></td>
+                        <td class="data">{{ user_profile.email }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Date of Joining</label></td>
+                        <td class="blank"></td>
+                        <td><label>Photo</label></td>
+                    </tr>
+
+                    <tr>
+                        <td class="data">{{ user_profile.doj }}</td>
+                        <td class="blank"></td>
+                        <td class="data">{{ user_profile.city }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>City</label></td>
+                        <td class="blank"></td>
+                        <td><label>State</label></td>
+                    </tr>
+
+                    <tr>
+                        <td class="data">{{ user_profile.city }}</td>
+                        <td class="blank"></td>
+                        <td class="data">{{ user_profile.state }}</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Country</label></td>
+                        <td class="blank"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="data">{{ user_profile.country }}</td>
+                        <td class="blank"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Address</label></td>
+                        <td class="blank"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="data"><p>{{ user_profile.address }}</p></td>
+                    </tr>
+                    
+                </table>
+
+            </section>
+
+            <div class="changeBtn">
+                <button type="submit" hidden>Save</button>
+                <button type="reset" hidden>Cancel</button>
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock content %}

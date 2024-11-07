@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.admin-header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header .logo img {
+    height: 50px;
+}
+
+.admin-header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.admin-header nav ul li {
+    margin: 0 10px;
+}
+
+.admin-header nav ul li a {
+    color: #b8b8b8;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.admin-header nav ul li a i {
+    margin-right: 5px;
+}
+
+.admin-main {
+    padding: 20px;
+}
+
+.dashboard-overview {
+    margin-bottom: 40px;
+}
+
+.dashboard-overview .stats {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dashboard-overview .stat-item {
+    background-color: #dddddd;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+.dashboard-overview .stat-item h3 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+}
+
+.dashboard-overview .stat-item p {
+    margin: 0;
+    font-size: 2em;
+    color: #0056b3;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    padding-bottom: 10px;
+}

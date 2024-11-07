@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.wrap {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 300px;
+    height: auto;
+    max-width: 90%;
+    text-align: center;
+}
+.wrap h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-size: 1.5em;
+}
+.loginData {
+    margin-bottom: 20px;
+}
+.loginData label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+.loginData input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+
+input[type="text"],
+input[type="password"] {
+    display: flex;
+    border: none;
+    border-bottom: 1px solid #ccc; /* Only bottom border */
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin: 0;
+    outline: none;
+    background: transparent;
+}
+
+
+.loginBtn {
+    padding: 10px 30px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.loginBtn:hover {
+    background-color: #555;
+}
+a {
+    margin-top: 50px;
+}

@@ -1,0 +1,28 @@
+.calendar {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.calendar th, .calendar td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.calendar th {
+    background-color: #f2f2f2;
+}
+
+.calendar td:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.highlighted-cell {
+    background-color: #4caf50;
+}
+
+.dropdown {
+    margin-bottom: 20px;
+}

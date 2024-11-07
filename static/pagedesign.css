@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.header {
+    /* position: fixed; */
+    width: 100%;
+    /* max-height: 50px; */
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#toggleDashboardBtn{ /* Added by me */
+    height: 40px;
+    width: 40px;
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0;
+}
+/* Logout Button Styles */
+.logoutBtn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.logoutBtn:hover {
+    background-color: #555;
+}
+
+.dashboard {
+    width: 250px;
+    height: 100%;
+    background-color: #f4f4f4;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1;
+    padding-top: 60px;
+}
+.dashboard ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.dashboard li {
+    padding: 10px;
+    cursor: pointer;
+}
+.dashboard li:hover {
+    background-color: #ddd;
+}
+/* Style for close button */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.content {
+    /* position: absolute;
+    margin-top: 50px; */
+    margin-left: 0; /* Changed from 250px */
+    padding: 20px;
+}
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color-main);
+    width: 100%;
+}

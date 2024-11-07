@@ -1,0 +1,176 @@
+{% extends 'userpage.html' %}
+
+{% block title %}
+    Attendance
+{% endblock title  %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'User/attendance.css' %}">
+
+    <h2>Attendance Calendar</h2>
+
+    <main class="main_content">
+                
+        <section class="content" >
+
+            <div class="dropdown">
+              <label for="month">Select Month:</label>
+              <select id="month">
+                <option value="0">January</option>
+                <option value="1">February</option>
+                <option value="2">March</option>
+                <option value="3">April</option>
+                <option value="4">May</option>
+                <option value="5">June</option>
+                <option value="6">July</option>
+                <option value="7">August</option>
+                <option value="8">September</option>
+                <option value="9">October</option>
+                <option value="10">November</option>
+                <option value="11">December</option>
+              </select>
+              <label for="year">Select Year:</label>
+              <select id="year">
+                <!-- Years will be populated dynamically -->
+              </select>
+              <button onclick="generateCalendar()">Go</button>
+            </div>
+            
+            <table class="calendar">
+              <thead>
+                <tr>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                  <th>Sun</th>
+                </tr>
+              </thead>
+              <tbody id="calendar-body">
+                <!-- Calendar days will be generated dynamically here -->
+              </tbody>
+            </table>
+
+        </section>
+        {% for date in dates %}
+            {{date.timestamp}}
+        {% endfor %}
+
+    </main>
+
+    <script>
+        var attendanceData = {{ attendance_data|safe }};
+        console.log(attendanceData);
+    </script>
+
+
+
+    <script>
+        // Sample attendance data (replace with your actual data)
+        // const attendanceData = {
+        //   '2024-04-01': 'present',
+        //   '2024-04-05': 'absent',
+        //   '2024-04-10': 'present'
+        // };
+
+        
+      
+        function generateYears() {
+          const selectYear = document.getElementById('year');
+          const currentYear = new Date().getFullYear();
+      
+          for (let i = currentYear - 4; i <= currentYear + 10; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            selectYear.appendChild(option);
+          }
+        }
+      
+        function generateCalendar() {
+          const calendarBody = document.getElementById('calendar-body');
+          calendarBody.innerHTML = '';
+      
+          const monthSelect = document.getElementById('month');
+          const yearSelect = document.getElementById('year');
+          const selectedMonth = parseInt(monthSelect.value);
+          const selectedYear = parseInt(yearSelect.value);
+          const daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
+          const firstDayOfMonth = new Date(selectedYear, selectedMonth, 1).getDay();
+      
+          let day = 1 - firstDayOfMonth;
+          let hasDates = false;
+      
+          for (let i = 0; i < 6; i++) { // Assuming 6 rows for display
+            const row = document.createElement('tr');
+            
+            for (let j = 0; j < 7; j++) {
+              if (day <= 0 || day > daysInMonth) {
+                const cell = document.createElement('td');
+                cell.textContent = '';
+                row.appendChild(cell);
+              } else {
+                const cell = document.createElement('td');
+                cell.textContent = day;
+
+
+                // Check if the current cell date is the one you want to highlight
+                attendanceData.forEach(function(attendanceRecord) {
+                    // Extract timestamp from the attendance record
+                    var timestamp = new Date(attendanceRecord.timestamp);
+
+                    // Extract year, month, and date
+                    var year = timestamp.getFullYear();
+                    var month = timestamp.getMonth(); // Months are zero-based, so add 1
+                    var date = timestamp.getDate();
+
+                    if (selectedYear === year && selectedMonth === month && day === date) {
+                  cell.classList.add('highlighted-cell');
+                }
+
+
+                    // Display or process the extracted year, month, and date as needed
+                    console.log("Year: " + year + ", Month: " + month + ", Date: " + date);
+                });
+
+
+
+
+
+
+                
+                row.appendChild(cell);
+                hasDates = true;
+              }
+              day++;
+          }
+      calendarBody.appendChild(row);
+       if ( day > daysInMonth  ) {
+          break;
+      }
+          }
+      
+          // Remove the last row if it doesn't have any dates
+          if (!hasDates) {
+            calendarBody.removeChild(calendarBody.lastChild);
+          }
+        }
+        generateYears();
+      
+      // Set default values to current month and year
+        const currentMonth = new Date().getMonth();
+        const currentYear = new Date().getFullYear();
+        document.getElementById('month').value = currentMonth;
+        document.getElementById('year').value = currentYear;
+      
+        // Generate calendar for the default month and year
+        generateCalendar();
+      
+      </script>
+
+
+{% endblock content %}

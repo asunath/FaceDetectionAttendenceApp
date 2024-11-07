@@ -1,0 +1,86 @@
+{% extends 'userpage.html' %}
+
+{% block title %}
+    Apply Leave
+{% endblock title  %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'User/leave.css' %}">
+
+    <h2>Leave Application Form</h2>
+
+    <main class="main_content">
+                
+        <section class="content" >
+
+            <div class="info">
+                {% for leave in leave_available %}
+                    <div class="wrap"><p>{{leave.leave_type}}: {{leave.remaining}}</p></div>
+                {% endfor %}
+            </div>
+
+            <form id="leaveForm" method="post">
+
+                {% csrf_token %}
+                <div id="leaveData">
+                    <table>
+
+                        <tr>
+                            <th>Type</th>
+                            <th>From :</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <select required class="inputs" id="leavetype" name="leavetype">
+                                    <option hidden value="default">Select Leave Type</option>
+                                    {% for leave in leave_available %}
+                                        <option value="{{leave.leave_type}}">{{leave.leave_type}}</option>
+                                    {% endfor %}
+                                    <!-- <option value="Earned Leave">Earned Leave</option>
+                                    <option value="Maternity Leave">Maternity Leave</option>
+                                    <option value="Others">Others</option> -->
+                                </select>
+                            </td>
+                            <td>
+                                <input type="date" required class="inputs" id="startDate" name="startDate">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>To :</th>
+                            <th>Reason</th>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <input type="date" required class="inputs" id="endDate" name="endDate">
+                            </td>
+                            <td>
+                                <textarea type="text" placeholder="Reason" class="inputs" id="reason" name="reason"></textarea>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="submitReq">
+                    <button type="submit">Apply</button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script>
+        var data = {{ leave_available | safe }};
+    </script>
+
+    <script src="{% static 'User/leave.js' %}"></script>
+
+
+{% endblock content %}

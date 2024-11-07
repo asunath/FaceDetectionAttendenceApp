@@ -1,0 +1,79 @@
+{% extends 'adminpage.html' %}
+
+{% block title %}
+    Leave Requests
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'Admin/requestlist.css' %}">
+
+    <main class="main" id="details">
+        <section>
+            <h2>Pending Requests</h2>
+            {% if requests %}
+                <table class="requestlist_table">
+                    <tr>
+
+                        <th>SL.No</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Starting Date</th>
+                        <th>Ending Date</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                    
+                    {% for req in requests %}
+                        <tr>
+
+                            <td>{{forloop.counter}}</td>
+                            <td>{{req.name}}</td>
+                            <td>{{req.type}}</td>
+                            <td>{{req.startDate}}</td>
+                            <td>{{req.endDate}}</td>
+                            <td>{{req.reason}}</td>
+                            <td>{{req.status}}</td>
+                            <td>
+                                <!-- <div class="buttons"> -->
+                                    <button class="operationBtn" id="approveBtn"><a href="{% url 'approve' req.id %}">Approve</a></button>
+                                    <button class="operationBtn" id="rejectBtn"><a href="{% url 'reject' req.id %}">Reject</a></button> 
+                                    <button class="operationBtn" id="historyBtn"><a onclick="openPopup('{{ req.user.id }}')">View History</a></button>
+                                <!-- </div> -->
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            {% endif %}
+        </section>
+    </main>
+
+
+    <!-- POPUP WINDOW -->
+    <div id="popup_window">
+        <div id="popup_content">
+
+            <h2>Details</h2>
+            <table class="details_table" id="details_table">
+                
+            </table>
+
+            <h2>Leave History</h2>
+            <table class="history_table" id="history_table">
+
+            </table>
+            
+            <div class="btnContainer">
+                <button type="button" class="closeBtn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'Admin/requestlist.js' %}"></script>
+
+{% endblock content %}

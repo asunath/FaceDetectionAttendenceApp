@@ -1,0 +1,192 @@
+{% extends 'adminpage.html' %}
+
+{% block title %}
+    Leave Types
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'Admin/leavetypes.css' %}">
+
+
+
+    {% for message in messages%}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>User already exists!</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+
+
+
+    <!-- <h2>Leave Types</h2> -->
+    <main class="main_content">
+
+        <section class="content">
+            
+            <div>
+
+                <div id="add_new_div">
+                    <h2>Add New Leave Type</h2>
+                    <form id="add_new_form" method="post">
+                        {% csrf_token %}
+
+                        <input type="hidden" name="form_type" value="add_new_form">
+                        <table class="add_new_table">
+        
+                            <tr>
+                                <th><label>Leave Type Name</label></th>
+                                <!-- <td class="blank"></td> -->
+                                <td><input type="text" placeholder="Type Name" class="addNew" name="type_name" required></td>
+                            </tr>
+                            <tr>
+                                <th><label>Limit</label></th>
+                                <!-- <td class="blank"></td> -->
+                                <td><input type="number" name="limit" class="addNew" placeholder="Limit" required></td>
+                            </tr>
+                            
+                        </table>
+                        
+                        <div class="changeBtn">
+                            <button type="submit" class="greenBtn">Add</button>
+                            <button type="reset" class="redBtn">Cancel</button>
+                        </div>
+        
+                    </form>
+                </div>
+    
+    
+                <div id="leave_type_div">
+                    <h2>Leave Types</h2>
+                    <table class="leave_type_table">
+                        <tr>
+                            <th>SL.No</th>
+                            <th>Type Name</th>
+                            <th>Limit</th>
+                        </tr>
+                        
+                        {% for leave_type in leave_types %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{leave_type.name}}</td>
+                                <td>{{leave_type.limit}}</td>
+                            </tr>
+                        {% endfor %}
+        
+                    </table>
+        
+                    <div class="changeBtn">
+                        <button type="button" id="editBtn" onclick="resetLeaveAvailable()">Reset Leave Available</button>
+                        <button type="button" onclick="openPopup()" class="redBtn">Edit Limit</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- POPUP WINDOW -->
+    <div id="popup_window">
+        <div id="popup_content">
+            <h2>Monthly Leave Reset</h2>
+            
+            <form id="limit_change_form" method="post">
+                {% csrf_token %}
+
+                <input type="hidden" name="form_type" value="limit_change_form">
+                <table class="details_table" id="details_table">
+                    <tr>
+                        <th>SL.No</th>
+                        <th>Type Name</th>
+                        <th>Limit</th>
+                        <!-- <th></th> -->
+                    </tr>
+                        
+                    {% for leave_type in leave_types %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{leave_type.name}}</td>
+                            <td><input type="number" id="{{ leave_type.name }}" name="{{ leave_type.name }}" value="{{ leave_type.limit }}"></td>
+                        </tr>
+                    {% endfor %}
+    
+                </table>
+    
+                <div class="btnContainer">
+                    <button type="submit" class="hiddenBtn" id="greenBtn">Reset Leave Limit</button>
+                    <button type="reset" class="hiddenBtn" id="redBtn" onclick="closePopup()">Cancel</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    
+    <script>
+
+        function openPopup(){
+
+            // document.getElementById('content').style.filter = 'blur(5px)';
+            document.getElementById('popup_window').style.display = 'block';
+        }
+        function closePopup(){
+            document.getElementById('popup_window').style.display = 'none';
+            document.getElementById('details').style.filter = 'none';
+        }
+
+
+        function resetLeaveAvailable() {
+
+            var url = "api/resetLeaveAvailable/";
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    alert("Reseted Leave Available");
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+                document.getElementById('details').style.filter = 'blur(5px)';
+                document.getElementById('popup_window').style.display = 'block';
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function resetLimit(leaveId){
+
+            var url = "/api/resetLimit/" + useleaveIdrId + "/";
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    buildTable(data.user_history);
+                    detailsTable(data.leave_available);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+            document.getElementById('details').style.filter = 'blur(5px)';
+            document.getElementById('popup_window').style.display = 'block';
+        }
+
+
+    </script>
+{% endblock content %}

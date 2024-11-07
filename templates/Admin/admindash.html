@@ -1,0 +1,41 @@
+{% extends 'adminpage.html' %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'Admin/dashboard.css' %}">
+
+    <main>
+        <!-- <section>
+            <div class="wrap">
+                <p>Pending Requests :{{pending}}</p>
+            </div>
+        </section> -->
+
+        <section class="dashboard-overview">
+            <h2>Overview</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>Total Users</h3>
+                    <p>{{user_count}}</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Present Today</h3>
+                    <p>{{present}}</p>
+                </div>
+                <div class="stat-item">
+                    <h3>On Leave Today</h3>
+                    <p>{{on_leave}}</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Requests Pending</h3>
+                    <p>{{pending}}</p>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock content %}

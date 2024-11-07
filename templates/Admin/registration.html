@@ -1,0 +1,123 @@
+{% extends 'adminpage.html' %}
+
+{% block title %}
+    User Registration
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'User/profile.css' %}">
+
+
+
+    {% for message in messages%}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>User already exists!</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    
+
+
+
+    <h2>User Registration</h2>
+    <main class="main_content">
+
+        <section class="content" >
+            
+            <h3>Registration Form</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td><label>Full Name</label></td>
+                        <td class="blank"></td>
+                        <!-- <td><label>Department</label></td> -->
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="Full Name" name="name" required></td>
+                        <td class="blank"></td>
+                        <!-- <td><input type="text" placeholder="Department" name="department" disabled></td> -->
+                    </tr>
+                    <tr>
+                        <td><label>Gender</label></td>
+                        <td class="blank"></td>
+                        <td><label>Date of Birth</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="gender" required>
+                                <option value="" hidden> Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </td>
+                        <td class="blank"></td>
+                        <td><input type="date" name="dob" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Mobile Number</label></td>
+                        <td class="blank"></td>
+                        <td><label>Email</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="tel" placeholder="Mobile Number" name="mobile" required></td>
+                        <td class="blank"></td>
+                        <td><input type="email" placeholder="Email" name="email" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Date of Joining</label></td>
+                        <td class="blank"></td>
+                        <td><label>Photo</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="date" name="doj" required></td>
+                        <td class="blank"></td>
+                        <td><input type="file" name="image" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>City</label></td>
+                        <td class="blank"></td>
+                        <td><label>State</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="City" name="city" required></td>
+                        <td class="blank"></td>
+                        <td><input type="text" placeholder="State" name="state" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Country</label></td>
+                        <td class="blank"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="Country" name="country" required></td>
+                        <td class="blank"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Address</label></td>
+                        <td class="blank"></td>
+                    </tr>
+                    <tr>
+                        <td><textarea placeholder="Address" name="address" required></textarea></td>
+                    </tr>
+                    
+                </table>
+                
+                <div class="changeBtn">
+                    <button type="submit">Register</button>
+                    <button type="reset">Cancel</button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+    {% if user_exists %}
+        <script>
+            alert("User already exists.");
+        </script>
+    {% endif %}
+
+{% endblock content %}

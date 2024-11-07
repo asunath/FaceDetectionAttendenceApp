@@ -1,0 +1,38 @@
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+}
+th {
+    background-color: #f2f2f2;
+}
+th,td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+table tr:not(:first-child):hover {
+    background-color: #fbfbfb;
+}
+h2 {
+    text-align: center;
+}
+
+
+
+#deleteBtn {
+    border: none;
+    color: white;
+    padding: 4px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #ff6b5e;
+}
+#deleteBtn:hover {
+    background-color: #ff3333;
+}
